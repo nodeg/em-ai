@@ -3,6 +3,9 @@
 ## Overview
 
 - Team name: Example
+- Default board: github:ORG_NAME/PROJECT_NUMBER
+  - Example: `github:SUSE/32` for SUSE org, project #32
+  - Used by check-gh-board skill to analyze board health
 - Notes:
   - <e.g. "Platform team">
   - <e.g. "Core team">
@@ -10,16 +13,6 @@
 ## Repositories
 
 - URL: GITHUB_URL
-
-## Jira
-
-- Default project key: <KEY>
-- Default board: <BOARD_ID> (<board name>, <URL>)
-- Skill to use: jira-<key>   # the project-specific skill, if any (otherwise the generic `jira` skill)
-- Conventions:
-  - <e.g. "Production bugs live in project BUG">
-  - <e.g. "Bugs use field X for SLA">
-  - <e.g. "A spike is a Task issue that uses prefix [SPIKE] in the summary">
 
 ### Other projects (optional)
 
