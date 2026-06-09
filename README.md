@@ -1,11 +1,12 @@
-# Claude EM
+# EM AI
 
-**Claude EM turns Claude into an Engineering Manager operating system.**
+**EM AI turns Claude into an Engineering Manager operating system.**
 
 Not a generic AI. Not a blank prompt.
 
 A context-aware, opinionated system that understands:
 - your team
+- your manager style
 - your context
 - how you run engineering
 
@@ -32,24 +33,24 @@ Works out of the box with **Jira** and **GitHub**. Other tools can be added via 
 
 1. Clone this repository.
 
-1. Install Claude Code:
+2. Install Claude Code:
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-1. Add your team context:
+3. Add your team context and EM style:
 
-* Copy `data/team_example.md` → `data/team_myteam.md`.
-* Fill in your team context and members
+* Copy `data/team_example.md` → `data/team_myteam.md` and fill in your team and members.
+* Copy `data/em_style_example.md` → `data/em_style.md` and fill in your style.
 
-1. Open Claude in your workspace:
+4. Open Claude in your workspace:
 
 ```bash
 claude
 ```
 
-1. Try your first prompt:
+5. Try your first prompt:
 
 > Analyze doms last 30 days, please.
 
@@ -91,7 +92,8 @@ claude
 
 ## How it works
 
-* **CLAUDE.md** defines your personal EM style and how Claude should behave
+* **CLAUDE.md** defines how Claude should behave
+* **EM style** (`data/em_style.md`) defines your personal way of working
 * **Skills** (`.claude/skills/`) are reusable prompts for real EM tasks
 * **Team context** (`data/team_*.md`) defines your team
 * **Data** (`data/`) stores shared information (Jira, GitHub, etc.)
@@ -125,6 +127,7 @@ claude
 em-ai/
 ├── data/                       # Shared data across initiatives
 │   ├── team_{name}.md          # Team context files
+│   ├── em_style.md             # Engineering Manager style
 │   ├── [source]/               # One folder per data source (GitHub for example)
 │   └── tmp/                    # Temporary files
 └── [initiative-name]/          # One folder per initiative
@@ -150,23 +153,23 @@ Check the [official docs](https://docs.anthropic.com/claude-code) and use your p
 
 ---
 
-### 3. Configure your EM profile
+### 3. Configure your team and EM profile
 
-Edit `CLAUDE.md` and define:
+Add
 
 * Your EM style
+* Your team details
 * Your expectations from Claude
 * Your way of working
 
-Then create your team context:
+by
 
-* Copy `data/team_example.md`
-* Rename it to `data/team_{your-team}.md`
-* Fill in your team context and members
+* Copying `data/team_example.md` → `data/team_myteam.md` and fill in your team and member details.
+* Copying `data/em_style_example.md` → `data/em_style.md` and fill in your style.
 
 ---
 
-### 4. (Optional) Install CLI tools
+### 4. Install CLI tools
 
 Claude EM is designed to work primarily with CLI tools instead of MCP, as they are faster and more cost-efficient.
 
@@ -181,7 +184,7 @@ gh auth login
 
 ---
 
-### 5. (Optional) Configure credentials
+### 5. Configure credentials
 
 Create a `.env.local` file at the workspace root (git-ignored):
 
@@ -205,6 +208,19 @@ claude mcp add --plugin github
 claude mcp add --plugin figma
 ```
 
+### 8. (Optional) Get the most out of 1:1s
+
+The `/one-on-one` skill works with nothing but a one-line prompt, but it gets sharper the more context you give it through the team file.
+
+**Per-person 1:1 doc.** Give any member a living doc and the skill will read it when preparing the conversation — open topics, agreed actions, signals to watch, goals, and what happened in past 1:1s:
+
+* Add a `1:1 file:` link to the member in `data/team_{your-team}.md`
+* The value can be a URL or a path, and the doc can be in **any format** — the skill adapts to whatever's there
+* For a suggested starting point, see `.claude/skills/one-on-one/references/person-file-example.md`
+* It's fully optional: if it's missing or unreachable, the skill simply ignores it
+
+**Career Frameworks.** Fill in the `## Career Frameworks` section of the team file with links (per level) to your expectations docs. The skill reads the one matching the member's seniority when the conversation turns to expectations or growth.
+
 ---
 
 ## Notes
@@ -225,6 +241,11 @@ Contributions are welcome:
 * Support for additional tools
 
 ---
+
+## Origin
+
+Original project called [claude-em](https://github.com/jcesarperez/claude-em)
+developed by Julio César Pérez Arques.
 
 ## License
 

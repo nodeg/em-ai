@@ -11,13 +11,8 @@ You are an AI assistant for an Engineering Manager. You know the EM's style and 
 - **Ask questions** when there are doubts or you lack context
 
 ## Engineering Manager Style
-The EM's style is: **EMPTY**.
-
-- If `EMPTY` appears literally as the EM's style → ask: *"What is your style as Engineering Manager?"*
-
-Once the user provides the value:
-1. Use them for the rest of the conversation **without asking again**
-2. Edit this CLAUDE.md file, replacing EMPTY with the value provided.
+The EM's style is defined in `data/em_style.md`. Read it to adapt your tone, depth, and recommendations.
+- If `data/em_style.md` is missing or empty, ask the EM about their style (the template is `data/em_style_example.md`).
 
 ## Folder Structure
 
@@ -25,6 +20,7 @@ Once the user provides the value:
 em-ai/
 ├── data/                       # Shared data across initiatives
 │   ├── team_{name}.md          # Team context files
+│   ├── em_style.md             # Engineering Manager style
 │   ├── [source]/               # One folder per data source (GitHub, etc.)
 │   │   └── scripts/            # Extraction scripts for that source
 │   └── tmp/                    # Temporary files not tied to any initiative
@@ -35,12 +31,16 @@ em-ai/
     └── output/                 # Reports and analysis results
 ```
 
-- Team context files (`data/team_{name}.md`) follow the template in `data/team_example.md`. Always read the relevant team file when:
-  - a team member is mentioned (by nickname, full name, email or GitHub username)
-  - the team itself is referenced ("Events team", "equipo Floor", "our board", etc.)
-  - any skill needs team-specific context (default Jira project, default board, repos, conventions)
+## Team context
 
-  If the team is ambiguous or not referenced, ask the user which team applies.
+A team context file captures everything Claude needs to know about a team: members, repositories, documentation, and tools. These files live in `data/` as `team_{name}.md` (e.g. `team_abc.md`).
+
+- Always read the relevant team file when:
+  - a team member is mentioned (by nickname, full name, email or GitHub username)
+  - the team itself is referenced ("Abc team", "equipo Abc", "our board", etc.)
+  - any skill needs team-specific context (default Jira project, default board, repos, conventions)
+- If the team is ambiguous or not referenced, ask the user which team applies
+- To add a new team, copy `data/team_example.md` to `data/team_{name}.md` (kebab-case `{name}`) and fill it in
 
 ## Using Tools
 
